@@ -2,7 +2,7 @@ from langchain_astradb import AstraDBVectorStore
 from langchain_openai import OpenAIEmbeddings
 from dotenv import load_dotenv
 import os
-from data_converter import dataconveter
+from .data_converter import dataconveter
 
 load_dotenv()
 
