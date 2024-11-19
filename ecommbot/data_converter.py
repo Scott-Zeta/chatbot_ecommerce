@@ -1,31 +1,23 @@
 import pandas as pd
 from langchain_core.documents import Document
-import os
+
 
 
 def dataconveter():
-    print("Current working directory:", os.getcwd())
-    product_data=pd.read_csv("./data/flipkart_product_review.csv")
+    # import os
+    # print("Current working directory:", os.getcwd())
+    product_data=pd.read_csv("./data/products.csv")
 
-    data=product_data[["product_title","review"]]
+    data=product_data.copy()
 
-    product_list = []
-
-    # Iterate over the rows of the DataFrame
-    for index, row in data.iterrows():
-        # Construct an object with 'product_name' and 'review' attributes
-        obj = {
-                'product_name': row['product_title'],
-                'review': row['review']
-            }
-        # Append the object to the list
-        product_list.append(obj)
-
-        
-            
     docs = []
-    for entry in product_list:
-        metadata = {"product_name": entry['product_name']}
-        doc = Document(page_content=entry['review'], metadata=metadata)
+    for index, row in data.iterrows():
+        content = f"Description: {row['Description']} | Tags: {row['Tags']} | Price: {row['Price']}"
+        metadata = row.drop('Tags').to_dict()
+        doc = Document(page_content=content, metadata=metadata)
         docs.append(doc)
     return docs
+
+if __name__ == "__main__":
+    print(f"Meatdata: {dataconveter()[0].metadata}")
+    print(f"Page_content: {dataconveter()[0].page_content}")
