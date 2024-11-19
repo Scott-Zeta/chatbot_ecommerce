@@ -34,7 +34,7 @@ def ingestdata(status):
 if __name__=='__main__':
     vstore,inserted_ids=ingestdata(None)
     print(f"\nInserted {len(inserted_ids)} documents.")
-    results = vstore.similarity_search("can you tell me the low budget sound basshead.")
+    results = vstore.similarity_search("Is there any products good for halloween?")
     for res in results:
             print(f"* {res.page_content} [{res.metadata}]")
             
