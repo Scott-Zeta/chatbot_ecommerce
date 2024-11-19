@@ -12,9 +12,9 @@ def dataconveter():
 
     docs = []
     for index, row in data.iterrows():
-        content = f"Description: {row['Description']} | Tags: {row['Tags']} | Price: {row['Price']}"
-        metadata = row.drop('Tags').to_dict()
-        doc = Document(page_content=content, metadata=metadata)
+        page_content = f"Product: {row['Title']} | Description: {row['Description']} | Tags: {row['Tags']} | Price: {row['Price']}"
+        metadata = {"content": f"Product: {row['Title']} | Description: {row['Description']} | URL: {row['URL']} | Price: {row['Price']}"}
+        doc = Document(page_content=page_content, metadata=metadata)
         docs.append(doc)
     return docs
 
